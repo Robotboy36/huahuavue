@@ -1,5 +1,5 @@
 <template>
     <div class="page">
-        项目库项目库项目库项目库
+        美业圈
     </div>
 </template>

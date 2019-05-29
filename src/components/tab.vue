@@ -20,21 +20,24 @@ export default {
             curTabName: 'xmk',
             list: [{
                 title: '项目库',
-                name: 'xmk'
+                name: 'xmk',
+                url: '/'
             }, {
                 title: '产品库',
-                name: 'cpk'
+                name: 'cpk',
+                url: '/products'
             }, {
                 title: '美业圈',
                 name: 'myq',
-                icon: 'myq.gif',
-                activeIcon: 'myq.gif'
+                url: '/meiye'
             }, {
                 title: '咖大教育',
-                name: 'kd'
+                name: 'kd',
+                url: '/kada'
             }, {
                 title: '我的',
-                name: 'wd'
+                name: 'wd',
+                url: '/me'
             }]
         }
     },
@@ -43,9 +46,32 @@ export default {
     filters: {
     },
 
+    watch: {
+        '$route' (route) {
+            // console.log('watch', route)
+            let curItem = this.list.filter(item => {
+                return item.url === route.path
+            })
+
+            this.curTabName = curItem[0] ? curItem[0].name : 'xmk'
+        }
+    },
+
+    mounted () {
+        let path = this.$route.path
+        let curItem = this.list.filter(item => {
+            return item.url === path
+        })
+
+        this.curTabName = curItem[0] ? curItem[0].name : 'xmk'
+    },
+
     methods: {
         onSwitchTab (item) {
+            // console.log(item.url)
             this.curTabName = item.name
+            this.$router.push(item.url)
+            // this.$router.replace(item.url)
         }
     }
 }
