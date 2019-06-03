@@ -2,3 +2,5 @@
 /config/
 /dist/
 /*.js
+*.min.js
+*.min.css

@@ -1,10 +1,10 @@
 <template>
     <div class="page">
-        <slider :pages="pages" :sliderinit="sliderinit"></slider>
+        <!-- <slider :pages="pages" :sliderinit="sliderinit"></slider> -->
     </div>
 </template>
 <script>
-import slider from 'vue-concise-slider'// 引入slider组件
+// import slider from 'vue-concise-slider'// 引入slider组件
 export default {
     data () {
         return {
@@ -41,7 +41,7 @@ export default {
         }
     },
     components: {
-        slider
+        // slider
     }
 }
 </script>

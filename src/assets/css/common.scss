@@ -18,6 +18,11 @@ ul {
     position: relative;
 }
 
+.page {
+    height: calc(100% - 54px);    
+    overflow-y: auto;
+}
+
 // tab选项卡
 .tab {
     position: absolute;

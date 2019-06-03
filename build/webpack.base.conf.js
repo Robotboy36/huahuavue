@@ -35,9 +35,12 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@': resolve('src')
     }
   },
+  // externals: {
+  //   'swiper': 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.x.x/js/swiper.min.js'
+  // },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
