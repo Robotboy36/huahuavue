@@ -9,8 +9,7 @@
 
         <xSwiper
             className="ad-swiper"
-            :list="adList"
-            :options="adSliderOptions"></xSwiper>
+            :list="adList"></xSwiper>
     </div>
 </template>
 

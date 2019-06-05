@@ -3,7 +3,7 @@
     <div class="swiper" :class="className">
         <div ref="swiper_el" class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="item in list" :key="item.imgUrl">
+                <div class="swiper-slide" v-for="(item, index) in list" :key="index">
                     <img v-if="item.imgUrl" :src="item.imgUrl">
                     <div v-if="item.title" class="swiper-title">
                         {{item.title}}
@@ -40,6 +40,8 @@ export default {
 
         list: {
             type: Array,
+            // 声明该参数必传， 不传则抛出错误
+            required: true,
             default () {
                 return []
             }
