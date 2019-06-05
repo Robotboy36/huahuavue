@@ -1,12 +1,20 @@
+<style>
+.swiper-slide img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+</style>
+
 <template>
     <div class="page">
-        <div ref="banner_swiper" class="swiper-container" style="height: 100px">
+        <div ref="banner_swiper" class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide"><img src="https://static.emeik.cn/FjZiPZ1ZvPMTpo4mLvlc5W9GGWVE"></div>
                 <div class="swiper-slide"><img src="https://static.emeik.cn/Fh2_GTX5NSE6SC0_DmF74eGwYIAK"></div>
                 <div class="swiper-slide"><img src="https://static.emeik.cn/FiCYaej0zRkLVcwiScN6mGwohoe1"></div>
             </div>
-            <div class="swiper-pagination"></div>
+            <div ref="swiper_pagination" class="swiper-pagination"></div>
         </div>
     </div>
 </template>
@@ -40,11 +48,16 @@ export default{
 
     methods: {
         init () {
-            let el = this.$refs.banner_swiper
+            let bannerEl = this.$refs.banner_swiper
+            let paginationEl = this.$refs.swiper_pagination
 
-            let bannerSwiper = new Swiper(el, {
-                // direction: 'vertical', // 垂直切换选项
-                // loop: true, // 循环模式选项
+            let bannerSwiper = new Swiper(bannerEl, {
+                loop: true, // 循环模式选项
+                autoplay: true,
+                autoHeight: true,
+                pagination: {
+                    el: paginationEl
+                }
             })
 
             console.log(bannerSwiper)
