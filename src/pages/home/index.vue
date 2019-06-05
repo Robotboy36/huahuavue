@@ -1,47 +1,57 @@
+<style lang="scss" src="../../assets/css/home.scss"></style>
+
 <template>
     <div class="page">
-        <!-- <slider :pages="pages" :sliderinit="sliderinit"></slider> -->
+        <xSwiper
+            className="banner-swiper"
+            :list="bannerList"
+            :options="sliderOptions"></xSwiper>
+
+        <xSwiper
+            className="ad-swiper"
+            :list="adList"
+            :options="adSliderOptions"></xSwiper>
     </div>
 </template>
+
 <script>
-// import slider from 'vue-concise-slider'// 引入slider组件
+import xSwiper from '../../components/swiper.vue'
+
 export default {
     data () {
         return {
-            pages: [
-                {
-                    title: '图片1',
-                    style: {
-                        background: 'url(https://static.emeik.cn/FjZiPZ1ZvPMTpo4mLvlc5W9GGWVE)'
-                    }
-                },
-                {
-                    title: '图片2',
-                    style: {
-                        background: 'url(http://static.emeik.cn/ljmLvVbitOmeUZ1E1d19VRkwI59E)'
-                    }
-                },
-                {
-                    title: 'slide3',
-                    style: {
-                        background: '#4bbfc3'
-                    }
-                }
-            ],
-            sliderinit: {
-                currentPage: 0,
-                thresholdDistance: 500,
-                thresholdTime: 100,
-                autoplay: 1000,
-                loop: true,
+            bannerList: [{
+                title: '图片1',
+                imgUrl: 'https://static.emeik.cn/FjZiPZ1ZvPMTpo4mLvlc5W9GGWVE'
+            }, {
+                title: '图片2',
+                imgUrl: 'https://static.emeik.cn/Fh2_GTX5NSE6SC0_DmF74eGwYIAK'
+            }, {
+                imgUrl: 'https://static.emeik.cn/FiCYaej0zRkLVcwiScN6mGwohoe1'
+            }],
+
+            sliderOptions: {
+                loop: false
+            },
+
+            // 广告轮播
+            adList: [{
+                title: '这是一条很硬的广告'
+            }, {
+                title: '我第二硬'
+            }],
+            adSliderOptions: {
                 direction: 'vertical',
-                infinite: 1,
-                slidesToScroll: 1
+                loop: true,
+                pagination: false,
+                autoplay: {
+                    delay: 5000
+                }
             }
         }
     },
     components: {
-        // slider
+        xSwiper
     }
 }
 </script>

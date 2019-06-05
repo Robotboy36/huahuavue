@@ -1,0 +1,64 @@
+.page {
+    background: #efefef;
+}
+
+// 顶部banner
+.banner-swiper {
+    height: 200px;
+    overflow: hidden;
+
+    .swiper-container,
+    .swiper-wrapper {
+        height: 100%;
+    }
+
+    .swiper-slide {
+        position: relative;
+    }
+
+    .swiper-pagination.swiper-pagination-bullets {
+        bottom: 30px;
+
+        .swiper-pagination-bullet {
+            width: 15px;
+            height: 4px;
+            border-radius: 4px;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #fff;
+        }
+    }
+
+    img {
+        display: block;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+    .swiper-title {
+        position: absolute;
+        left: 0;
+        right: 0;
+        padding: 0 10px;
+        bottom: 0;
+        height: 30px;
+        line-height: 30px;
+        background: rgba(0, 0, 0, 0.4);
+        color: #ffe;
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+// 广告
+.ad-swiper {
+    height: 40px;
+    line-height: 40px;
+    margin: 10px 0;
+    padding: 0 10px;
+    background: #fff;
+    overflow: hidden;
+}
