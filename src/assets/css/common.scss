@@ -21,6 +21,7 @@ ul {
 .page {
     height: calc(100% - 54px);    
     overflow-y: auto;
+    background: #f5f5f5;
 }
 
 // tab选项卡
@@ -69,7 +70,7 @@ ul {
         &.kd {
             background-image: url("../imgs/tabs/kd_nor.png");
             &.active {
-                background-image: url("../imgs/tabs/kd_sel.png");
+                background-image: url("../imgs/tabs/wd_sel.png");
             }
         }
 

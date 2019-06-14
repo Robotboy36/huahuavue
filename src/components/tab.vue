@@ -17,7 +17,7 @@
 export default {
     data () {
         return {
-            curTabName: 'xmk',
+            curTabName: 'wd',
             list: [{
                 title: '项目库',
                 name: 'xmk',

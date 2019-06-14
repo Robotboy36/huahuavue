@@ -9,7 +9,8 @@
 
         <xSwiper
             className="ad-swiper"
-            :list="adList"></xSwiper>
+            :list="adList"
+            :options="adSliderOptions"></xSwiper>
     </div>
 </template>
 
@@ -28,9 +29,11 @@ export default {
             }, {
                 imgUrl: 'https://static.emeik.cn/FiCYaej0zRkLVcwiScN6mGwohoe1'
             }],
-
             sliderOptions: {
-                loop: false
+                loop: true,
+                autoplay: {
+                    delay: 5000
+                }
             },
 
             // 广告轮播
@@ -42,7 +45,6 @@ export default {
             adSliderOptions: {
                 direction: 'vertical',
                 loop: true,
-                pagination: false,
                 autoplay: {
                     delay: 5000
                 }
