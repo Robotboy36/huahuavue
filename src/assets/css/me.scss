@@ -1,0 +1,39 @@
+.box{
+    background: #fff;
+    padding: 10px;
+
+    div{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    ul {
+        height: 200px;
+        border: 1px solid #ccc;
+        overflow-y: scroll;
+    
+        li{
+            height: 20px;
+            line-height: 20px;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.box-btn{
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    margin: 10px 0;
+
+    span{
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        padding: 10px;
+
+        &:active{
+            background: #eee;
+        }
+    }
+}
