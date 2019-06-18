@@ -5,7 +5,9 @@
             <div>头部数量<span>{{itemsL.length}}</span></div>
             <ul>
                 <li v-for="(item, index) in itemsL" :key="index">
-                    <input type="checkbox" v-model="item.checked">{{item.name}}
+                    <label>
+                        <input type="checkbox" v-model="item.checked">{{item.name}}
+                    </label>
                 </li>
             </ul>
         </div>
@@ -19,7 +21,9 @@
             <div>底部数量<span>{{itemsR.length}}</span></div>
             <ul>
                 <li v-for="(item, index) in itemsR" :key="index">
-                    <input type="checkbox" v-model="item.checked">{{item.name}}
+                    <label>
+                        <input type="checkbox" v-model="item.checked">{{item.name}}
+                    </label>
                 </li>
             </ul>
         </div>
@@ -30,52 +34,61 @@
 export default {
     data () {
         return {
-            itemsL: [{name: '北京1', checked: false},
-                {name: '北京2', checked: false},
-                {name: '北京3', checked: true},
-                {name: '北京4', checked: true},
-                {name: '北京5', checked: false},
-                {name: '北京6', checked: false},
-                {name: '北京7', checked: false},
-                {name: '北京8', checked: false},
-                {name: '北京9', checked: false},
-                {name: '北京10', checked: false},
-                {name: '北京11', checked: false}],
-            itemsR: [{name: '深圳1', checked: false},
-                {name: '深圳2', checked: true},
-                {name: '深圳3', checked: false}],
-            arrL: [],
-            arrR: []
+            itemsL: [
+                {name: '北京1'},
+                {name: '北京2'},
+                {name: '北京3'},
+                {name: '北京4'},
+                {name: '北京5'},
+                {name: '北京6'},
+                {name: '北京7'},
+                {name: '北京8'},
+                {name: '北京9'},
+                {name: '北京10'},
+                {name: '北京11'}
+            ],
+            itemsR: [
+                {name: '深圳1'},
+                {name: '深圳2'},
+                {name: '深圳3'}
+            ]
         }
     },
     methods: {
         upselectallornot: function () {
-            if (this.itemsL.length > 0) {
-                let ss = this.itemsL.filter(function (item) {
-                    return item.checked === true;
-                })
-                console.log(ss.length)
-            }
+            this.tempfun(this.itemsR, this.itemsL, 3)
         },
         upfun: function () {
-            this.arrR = this.itemsR.filter(function (item) {
-                return item.checked === true;
-            })
-            this.arrL = this.itemsR.filter(function (item) {
-                return item.checked === false;
-            })
-            this.itemsL = this.itemsL.concat(this.arrR);
-            this.itemsR = this.arrL;
+            // 提取选中
+            // 如果用filter的话， 还需要再循环一次，把原数组中的选中项移除， 建议直接用 while
+            // 为什么不用for? 因为选中的元素要在原数组中移除， 循环中移除某个元素时候，后面的会顶上来
+            // 这样循环下标会乱
+            // 用while， 删除时下标不往后++, 这样后面元素顶上来还是会检测到那个元素
+            // 所以： 确定循环次数的可以用for, 不确定的可以用while
+            this.tempfun(this.itemsR, this.itemsL, 1)
         },
         downfun: function () {
-            this.arrL = this.itemsL.filter(function (item) {
-                return item.checked === true;
-            })
-            this.arrR = this.itemsL.filter(function (item) {
-                return item.checked === false;
-            })
-            this.itemsR = this.itemsR.concat(this.arrL);
-            this.itemsL = this.arrR;
+            this.tempfun(this.itemsL, this.itemsR, 2)
+        },
+        tempfun: function (arr1, arr2, type) {
+            let selected = [];
+            let i = 0;
+
+            while (i < arr1.length) {
+                let item = arr1[i];
+                if (item.checked) {
+                    arr1.splice(i, 1);
+                    item.checked = false;
+                    selected.push(item);
+                } else {
+                    i++;
+                }
+            }
+            if (type === 1) {
+                this.itemsL = this.itemsL.concat(selected);
+            } else if (type === 2) {
+                this.itemsR = this.itemsR.concat(selected);
+            }
         }
     }
 }
