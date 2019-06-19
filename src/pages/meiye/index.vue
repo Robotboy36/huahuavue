@@ -22,7 +22,7 @@ table span{font-size: 20px;margin: 10px 10px}
     <div class="page" style="background: #F2F2F2">
         <table id="mytable">
             <tr>
-                <th><input type="checkBox" @click="selectProduct(isSelectAll)" v-bind:checked="isSelectAll" />全选</th>
+                <th><input type="checkBox" @click="selectProduct()" :checked="isSelectAll" />全选</th>
                 <th>商品</th>
                 <th>数量</th>
                 <th>单价(元)</th>
@@ -31,7 +31,7 @@ table span{font-size: 20px;margin: 10px 10px}
             </tr>
             <tr v-for="(item,index) in productList" :key="index">
                 <td>
-                    <input type="checkBox" v-bind:checked="item.isSelect" @click="item.isSelect=!item.isSelect"/>
+                    <input type="checkBox" :checked="item.isSelect" @click="item.isSelect=!item.isSelect"/>
                 </td>
                 <td>{{item.proName}}</td>
                 <td>
@@ -126,15 +126,21 @@ export default {
                     'proNum': 5,
                     'proPrice': 100
                 }
-            ]
+            ],
+            isSelectAll: false
         }
     },
     methods: {
-        selectProduct: function (_isSelect) {
+        selectProduct () {
             // 遍历productList，全部取反
-            for (var i = 0; i < this.productList.length; i++) {
-                this.productList[i].isSelect = !_isSelect;
-            }
+            // for (var i = 0; i < this.productList.length; i++) {
+            //     this.productList[i].isSelect = !_isSelect;
+            // }
+            this.isSelectAll = !this.isSelectAll;
+
+            this.productList.forEach((item) => {
+                item.isSelect = this.isSelectAll;
+            })
         },
         deletePro: function (index) {
             // 删除当前产品
@@ -147,10 +153,12 @@ export default {
     },
     computed: {
         // 检测是否全选
-        isSelectAll: function () {
-            // 如果productList中每一条数据的isSelect都为true，返回true，否则返回false;
-            return this.productList.every(function (val) { return val.isSelect });
-        },
+        // isSelectAll: function () {
+        //     // 如果productList中每一条数据的isSelect都为true，返回true，否则返回false;
+        //     return this.productList.every(function (val) {
+        //         return val.isSelect
+        //     });
+        // },
         getTotal: function () {
             var prolist = this.productList.filter(function (val) { return val.isSelect });
             var totalPri = 0;
@@ -161,10 +169,16 @@ export default {
         }
     },
     mounted: function () {
-        var _this = this;
+        // var _this = this;
+        // console.log(this)
+        // this.selectProduct();
+
         // 为productList添加select（是否选中）字段，初始值为true
-        this.productList.map(function (item) {
-            _this.$set(item, 'isSelect', true);
+        this.productList.map((item) => {
+        // this.productList.map(function (item) {
+            // _this.$set(item, 'isSelect', false);
+            // this.selectProduct();
+            item.isSelect = false;
         })
     }
 }
