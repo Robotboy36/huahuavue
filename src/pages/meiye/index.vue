@@ -5,7 +5,6 @@ table th{width: 60px;}
 table td{width: 60px;text-align: center;}
 table a{text-decoration:none;color: black}
 table span{font-size: 20px;margin: 10px 10px}
-table strong{border: 1px solid;}
 .checkPro{
     line-height: 40px;
     position: fixed;
@@ -13,16 +12,17 @@ table strong{border: 1px solid;}
     right: 0;
     bottom: 53px;
     margin: auto;
-    background-color: gray;
+    padding: 0 10px;
+    background-color: #CFCFCF;
 }
 .leftConent {float: left;}
 .rightConent{float: right;}
 </style>
 <template>
-    <div class="page">
+    <div class="page" style="background: #F2F2F2">
         <table id="mytable">
             <tr>
-                <th><input type="checkBox"  @click="selectProduct(isSelectAll)" v-bind:checked="isSelectAll" />全选</th>
+                <th><input type="checkBox" @click="selectProduct(isSelectAll)" v-bind:checked="isSelectAll" />全选</th>
                 <th>商品</th>
                 <th>数量</th>
                 <th>单价(元)</th>
@@ -30,17 +30,25 @@ table strong{border: 1px solid;}
                 <th>操作</th>
             </tr>
             <tr v-for="(item,index) in productList" :key="index">
-                <td><input type="checkBox" v-bind:checked="item.isSelect" @click="item.isSelect=!item.isSelect"/></td>
+                <td>
+                    <input type="checkBox" v-bind:checked="item.isSelect" @click="item.isSelect=!item.isSelect"/>
+                </td>
                 <td>{{item.proName}}</td>
-                <td><span><a href="#" @click="item.proNum>0?item.proNum--:''">-</a></span><strong>{{item.proNum}}</strong><span><a href="#" @click="item.proNum++">+</a></span></td>
+                <td>
+                    <span><a href="#" @click="item.proNum > 1 ? item.proNum-- : ''">-</a></span><strong>{{item.proNum}}</strong><span><a href="#" @click="item.proNum >= 10 ? '' : item.proNum++">+</a></span>
+                </td>
                 <td>{{item.proPrice}}</td>
-                <td>{{item.proPrice*item.proNum}}</td>
-                <td><a href="#" @click="deletePro(index)">删除</a></td>
+                <td>{{item.proPrice * item.proNum}}</td>
+                <td>
+                    <a href="#" @click="deletePro(index)">删除</a>
+                </td>
             </tr>
         </table>
         <div class="checkPro">
             <div class="leftConent">
-                <span><a href="#" @click="deleteProduct">删除所选产品</a></span>
+                <span>
+                    <a href="#" @click="deleteProduct">删除所选产品</a>
+                </span>
             </div>
             <div class="rightConent">
                 <span>{{getTotal.totalNum}}件商品总计：￥{{getTotal.totalPrice}}</span>
@@ -124,12 +132,12 @@ export default {
     methods: {
         selectProduct: function (_isSelect) {
             // 遍历productList，全部取反
-            for (var i = 0, len = this.productList.length; i < len; i++) {
+            for (var i = 0; i < this.productList.length; i++) {
                 this.productList[i].isSelect = !_isSelect;
             }
         },
         deletePro: function (index) {
-            alert('你正在删除' + this.productList[index].proName);
+            // 删除当前产品
             this.productList.splice(index, 1);
         },
         // 删除已经选中(isSelect=true)的产品
@@ -146,7 +154,7 @@ export default {
         getTotal: function () {
             var prolist = this.productList.filter(function (val) { return val.isSelect });
             var totalPri = 0;
-            for (var i = 0, len = prolist.length; i < len; i++) {
+            for (var i = 0; i < prolist.length; i++) {
                 totalPri += prolist[i].proPrice * prolist[i].proNum;
             }
             return {totalNum: prolist.length, totalPrice: totalPri}
