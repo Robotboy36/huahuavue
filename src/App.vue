@@ -21,7 +21,7 @@ export default {
 
     created () {
         this.path = this.$route.path
-        console.log('this.$router.path', this.$route)
+        // console.log('this.$router.path', this.$route)
     },
 
     components: {
@@ -30,15 +30,15 @@ export default {
 
     computed: {
         showTab () {
-            console.log('this.path', this.path)
-            return ['/', '/me'].includes(this.path)
+            // console.log('this.path', this.path)
+            return ['/', '/products', '/meiye', '/kada', '/me'].includes(this.path)
         }
     },
 
     watch: {
         '$route' (route) {
             this.path = route.path
-            console.log('路由变化', route)
+            // console.log('路由变化', route)
         }
     }
 }
